@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Agregamos los namespace de thymeleaf -->
+<html xmlns ="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!-- Se replica lo que se encuentra en la seccion de head del index -->
+<head th:replace="index :: head">
+    <title>Agregar Docente</title>
+</head>
+<body>
+    <!-- Se replica lo que se encuentra en la seccion de header del index -->
+    <header th:replace="index :: header"></header>
+    <div class="container mt-4">
+        <div class="col-sm-6">
+             <!-- th:object="${docente}"  con esto relacionamos el obejto de tipo docente del controlador y
+        -- Mediante el path @{/docente/guardar}  se enviala informacion  al controlador-->
+            <form th:action="@{/docente/guardar}" method="post" th:object="${docente}">
+                <div class="card">
+                    <div class="card">
+                        <div class="card-header" style="text-align:center;">
+                            <h3>Agregar Docente</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="hidden" th:field="*{id}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_usuario">Codigo</label>
+                                <input type="text"  th:field="*{id_usuario}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text"  th:field="*{nombre}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido</label>
+                                <input type="text"  th:field="*{apellido}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog">Blog</label>
+                                <input type="text"  th:field="*{blog}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="profesional">Profesional</label>
+                                <input type="text"  th:field="*{profesional}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="escalaron">Escalaron</label>
+                                <input type="text"  th:field="*{escalaron}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="idioma">Idioma</label>
+                                <input type="text"  th:field="*{idioma}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="anios_experiencia">Años de experiencia</label>
+                                <input type="text"  th:field="*{anios_experiencia}" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="area_trabajo">Area de trabajo</label>
+                                <input type="text"  th:field="*{area_trabajo}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <input class="btn btn-success" type="submit" name="guardar" value="Guardar">
+                            <a th:href="@{/docente/listard}" class="btn btn-info">Regresar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Se replica lo que se encuentra en la seccion de footer del index -->
+    <footer th:replace="index:: footer"></footer>
+    <!--  Librerias de bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <!--  Librerias de fontawesome -->
+    <script src="https://kit.fontawesome.com/240d17eb81.js" crossorigin="anonymous"></script>
+    <!--  Librerias de jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

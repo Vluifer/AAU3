@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Agregamos los namespace de thymeleaf -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="index:: head">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <!-- las etiquetas th que se anteponen a los atributos, su uso radica en poder utilizar las propiedades 
+    de thymeleaf th:replace="index::header, con esto replicamos todo lo se encuentra en la seccion 
+    de header del index  -->
+    <header th:replace="index :: header"></header>
+    <div class="container mt-4">
+        <!-- Se mostrar la accion de solo al rol correspondiente -->
+        <a th:href="@{/usuario/agregar}" class="btn btn-primary">Crear Usuario</a>
+        <!-- Decimos que la tabla tiene algo lo muestre en la tabla -->
+        <div th:if="${usuarios != null and !usuarios.empty}">
+            <table class="table table-striped table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Clave</th>
+                        <th>Nombre</th> 
+                        <th>Telefono</th>
+                        <th>Emial</th>
+                        <th >Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Utlizamos foreac para iterar los valores que tiene nuestra tabla -->
+                        <tr th:each="usuario: ${usuarios}">
+                            <!-- Mostramos los valores que nos arroja el foreach -->
+                            <td th:text="${usuario.cedula}" scope="row"></td>
+                            <td  th:text="${usuario.clave}" scope="row"></td>
+                            <td th:text="${usuario.nombre}" scope="row"></td>
+                            <td th:text="${usuario.telefono}" scope="row"></td>
+                            <td th:text="${usuario.email}" scope="row"></td>
+                            <!-- Mediante el path de usuario/editar emviamos al contrallador lo que obtenemos del boton editar -->
+                            <td><a th:href="@{/usuario/editar/} + ${usuario.cedula}" th:text="Editar" class="btn btn-info"></a></td>
+                            <!-- Con este metodo enviamos a la funcion javaScript el valor que obtenemos de ${usuario.cedula} -->
+                           <td><a th:onclick="eliminar([[${usuario.cedula}]])" th:text="Eliminar" class="btn btn-danger"></a></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+        <!-- Si la tabla esta vacia que muestre el mensaje  -->
+        <div th:if="${usuarios == null or usuarios.empty}">
+            La lista es vacia
+        </div>
+    </div>
+    <!-- Se replica lo que se encuentra en la seccion de footer del index -->
+    <footer th:replace="index :: footer"></footer>
+    <!--  Librerias de bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <!--  Librerias de fontawesome -->
+    <script src="https://kit.fontawesome.com/240d17eb81.js" crossorigin="anonymous"></script>
+    <!--  Librerias de jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--  Librerias de sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <!-- Ruta donde se encuetran las funciones de javaScript -->
+    <script src="../funciones.js"></script>   
+</body>
+</html>
